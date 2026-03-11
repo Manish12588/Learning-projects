@@ -6,7 +6,8 @@ on:
             - main
         paths:
           - 'calorie-app/**'
-
+    workflow_dispatch:
+      
 jobs:
     docker-build-and-push:
         runs-on: ubuntu-latest
