@@ -20,7 +20,7 @@ services:
   postgres:
     image: postgres:16-alpine          # official lightweight image
     container_name: practice_postgres
-    restart: unless-stopped
+    restart: on-failure
     environment:
       POSTGRES_DB:       practicedb
       POSTGRES_USER:     admin
@@ -53,7 +53,7 @@ services:
     build:
       context: ./app
     container_name: practice_flask
-    restart: unless-stopped
+    restart: always
     ports:
       - 5000:5000
     environment:
@@ -84,7 +84,7 @@ services:
   dashboard:
     image: nginx:alpine
     container_name: practice_dashboard
-    restart: unless-stopped
+    restart: always
     ports:
       - "8080:80"                      # open http://localhost:8080
     volumes:
@@ -97,6 +97,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: practice_mysql
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: Test@123
       MYSQL_DATABASE: mysql_db
